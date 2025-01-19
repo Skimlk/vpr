@@ -1,5 +1,3 @@
-//Setup
-
 c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 img = document.getElementById("scream");
@@ -12,8 +10,7 @@ function drawLine(x, color)
 		ctx.fillStyle = color;
 		ctx.globalAlpha = 1;
 		ctx.moveTo(x, 0);
-                ctx.lineTo(x, 10000);
-		//ctx.style['margin-left'] = Math.floor((window.innerWidth - 220) * 0.5) + 'px';
+        ctx.lineTo(x, 10000);
 		ctx.stroke();
 }
 
@@ -28,7 +25,7 @@ function updateCanvasPoints()
 	{
 		if(images[imageSelected].points[i] != undefined)
 		{
-			selectedColor = "#6991fd";
+			var selectedColor = "#6991fd";
 			if(i == pointSelected)
 			{
 				selectedColor = "rgb(253, 117, 103)";
@@ -46,7 +43,6 @@ function updateCanvasPoints()
 image.onmousemove = () => {
 		if(images[imageSelected].url != undefined)
 		{
-			//document.getElementsByTagName("body")[0].style.cursor = "url('google.cur'), auto";
 			ctx.drawImage(img, 0, 0);
 			x = ((event.pageX - image.offsetLeft)/image.clientWidth) * document.getElementById("scream").naturalWidth;
 			ctx.beginPath();
@@ -67,4 +63,3 @@ image.onclick = () => {
 		rePoints();
 	}
 }
-

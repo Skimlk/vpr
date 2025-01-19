@@ -1,23 +1,36 @@
-//Re-used Elements
-newImageButton = document.getElementById('newimg-button');
+function Point(name, mapCoords, imgXCoord, bearing, natWid) {
+  this.name = name;
+  this.mapCoords = null;
+  this.imgXCoord = null;
+  this.bearing = undefined;
+  this.natWid = null;
+}
+function ImgObj(name, url, points, bearings, fov) {
+        this.name = name;
+        this.url = url;
+        this.points = []; 
+        this.bearings = []; 
+        this.fov = fov;
+}
+
+newImageButton = document.getElementById("newimg-button");
 imageSelector = document.getElementById("image-selector");
 image = document.getElementById("scream");
 imageCanvas = document.getElementById("canvas");
 
 function updateImage() {
-	//alert("Image Updated");
         if(images[imageSelected].url == undefined)
         {
-        	document.getElementById("scream").src = "20230326_180945.jpg";
+        	document.getElementById("scream").src = "./assets/images/placeholder.jpg";
         }
         else
         {
                 document.getElementById("scream").src = images[imageSelected].url;
         }
 	document.getElementById("scream").onload = function() {
-	        document.getElementById("canvas").width = document.getElementById("scream").naturalWidth;
+	    document.getElementById("canvas").width = document.getElementById("scream").naturalWidth;
 		images[imageSelected].natWid = document.getElementById("scream").naturalWidth;
-	        document.getElementById("canvas").height = document.getElementById("scream").naturalHeight;
+	    document.getElementById("canvas").height = document.getElementById("scream").naturalHeight;
 		ctx.drawImage(img, 0, 0);
 		updateCanvasPoints();
 	}
@@ -239,7 +252,7 @@ document.getElementById('image-remove-button').onclick = function() {
 		}
 		images = [];
 		rePoints();
-                document.getElementById("imageManip").style.display = "none";
+        document.getElementById("imageManip").style.display = "none";
 	}
 }
 
