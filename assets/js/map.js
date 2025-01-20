@@ -46,33 +46,6 @@ function initMap() {
 		images[imageSelected].points[pointSelected].mapCoords = event.latLng;
 		rePoints();
 	});
-
-	const l1 = new google.maps.Polyline({
-		path: line,
-		geodesic: true,
-		strokeColor: "#FF0000",
-		strokeOpacity: 1.0,
-		strokeWeight: 2,
-	});
-
-	l1.setMap(map);
-
-	var lineHeading = google.maps.geometry.spherical.computeHeading(
-		line.getPath().getAt(0),
-		line.getPath().getAt(1),
-	);
-	var newPt0 = google.maps.geometry.spherical.computeOffset(
-		line.getPath().getAt(0),
-		20000000,
-		lineHeading,
-	);
-	line.getPath().insertAt(0, newPt0);
-	var newPt1 = google.maps.geometry.spherical.computeOffset(
-		line.getPath().getAt(1),
-		20000000,
-		lineHeading + 180,
-	);
-	line.getPath().push(newPt1);
 }
 
 function rePoints() {

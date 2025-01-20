@@ -1,8 +1,8 @@
-c = document.getElementById("canvas");
-ctx = c.getContext("2d");
-img = document.getElementById("scream");
+ctx = document.getElementById("canvas").getContext("2d");
+img = document.getElementById("background-image");
 ctx.drawImage(img, 0, 0);
 ctx.stroke();
+image = document.getElementById("canvas");
 
 function drawLine(x, color)
 {
@@ -13,11 +13,6 @@ function drawLine(x, color)
         ctx.lineTo(x, 10000);
 		ctx.stroke();
 }
-
-var lines = [];
-image = document.getElementById("canvas");
-
-
 
 function updateCanvasPoints()
 {
@@ -39,12 +34,11 @@ function updateCanvasPoints()
 	}
 }
 
-
 image.onmousemove = () => {
 		if(images[imageSelected].url != undefined)
 		{
 			ctx.drawImage(img, 0, 0);
-			x = ((event.pageX - image.offsetLeft)/image.clientWidth) * document.getElementById("scream").naturalWidth;
+			x = ((event.pageX - image.offsetLeft)/image.clientWidth) * document.getElementById("background-image").naturalWidth;
 			ctx.beginPath();
 				drawLine(x, "#00ff00");
 				drawLine(x + 1, "#00ff00");
@@ -56,10 +50,8 @@ image.onmousemove = () => {
 
 image.onclick = () => {
 		if(images[imageSelected].url != undefined && pointSelected != undefined){
-	        //alert("X Coordinate: " + x);
 		images[imageSelected].points[pointSelected].imgXCoord = x;
 		document.getElementById("point" + pointSelected).querySelector(".xcoordField").value = images[imageSelected].points[pointSelected].imgXCoord;
-		//drawLine(x, "rgb(253, 117, 103)");
 		rePoints();
 	}
 }

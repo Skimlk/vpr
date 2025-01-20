@@ -3,113 +3,127 @@
   --overlay-box-height: 9;
   --overlay-box-width: 16;
 }
-
-
 body {
-        //background-color: #d6daf0;
-	background: #ffe 
-	url(https://s.4cdn.org/image/fade.png) 
-	top center repeat-x;
+    background-color: #d6daf0;
+	background: #ffe url("../images/fade.png") top repeat-x;
 }
 .topbar-button {
-        height: var(--bar-width);
+    height: var(--bar-width);
 }
 #top-bar {
-        border: black solid 1px;
-        width: 100%;
-        height: var(--bar-width);
+    border: black solid 1px;
+    width: 100%;
+    height: var(--bar-width);
 	background-color: #f9c56c;
+}
+#overlay-bg {
+	z-index: 6;
+	top: 0;
+	left: 0;
+	position: absolute;
+	background-color: black;
+	opacity: 80%;
+	height: 100%;
+	width: 100%;
+}
+#overlay-canvas {
+	height: 100%; 
+	width: 100%
+}
+#overlay-img {
+	display: none; 
+	height: 100%;
+	width: 100%
 }
 #main-content-container {
 	border: black solid 1px;
-        margin-top: 5px;
-        height: calc(100vh - (25px + var(--bar-width)));
-        //Horizontally align child divs
-        margin: 0 auto;
-        display: flex;
-        overflow-y: hidden;
+    margin-top: 5px;
+    height: calc(100vh - (25px + var(--bar-width)));
+    //Horizontally align child divs
+    margin: 0 auto;
+    display: flex;
+    overflow-y: hidden;
 }
 #sidebar {
-        //background-color: #00aa9e;
-        //horizontally align sidebar
-        //float: left;
-        height: calc(100% - 30px);
-        width: 600px;
-        padding: 15px;
-        overflow-y: auto;
+    //background-color: #00aa9e;
+    //horizontally align sidebar
+    //float: left;
+    height: calc(100% - 30px);
+    width: 600px;
+    padding: 15px;
+    overflow-y: auto;
 	border-right: black solid 1px;
 }
 #map {
-        //horizontally align sidebar;
-
-        width: 100%;
-
+    //horizontally align sidebar;
+    width: 100%;
 }
 .sidebar-element-table {
-        background-color: #6991fd;
-        margin: 10px;
+    background-color: #6991fd;
+    margin: 10px;
 }
 span {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 td {
-        background-color: white;
-        text-align: center;
+    background-color: white;
+    text-align: center;
 }
 .num-form {
-        width: 15px;
+    width: 15px;
 }
 .select-button {
-        margin-left: 5px;
+    margin-left: 5px;
 }
 #newpoint-button {
-        margin: 5px;
+    margin: 5px;
 }
 .text-field {
-        margin: 5px;
+    margin: 5px;
 	margin-right: 0px;
 }
 .num-field {
-        width: 50px;
+    width: 50px;
 }
 .point-title {
-        margin: 0px;
-        display: inline;
+    margin: 0px;
+    display: inline;
 }
 input[type='file'] {
-        color: transparent;
-        width: 68.25px;
+    color: transparent;
+    width: 68.25px;
+}
+#canvas {
+	width: 100%;
+	display: block
 }
 #canvas-container {
-        margin-top: 10px;
+    margin-top: 10px;
 }
 .xcoordField
 {
 	width: 100px;
 }
-
 #eo-box {
 	z-index: 7;
 	width: calc(90vw);
-        height: calc(90vw / (var(--overlay-box-width)/var(--overlay-box-height)));
-        max-height: calc(90vh);
-        max-width: calc(90vh * (var(--overlay-box-width)/var(--overlay-box-height)));
-        margin: auto;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    height: calc(90vw / (var(--overlay-box-width)/var(--overlay-box-height)));
+    max-height: calc(90vh);
+    max-width: calc(90vh * (var(--overlay-box-width)/var(--overlay-box-height)));
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
 #enlarged-overlay
 {
 	margin: 0;
 	padding: 0;
 }
-
 #pac-input
 {
 	background: rgb(255, 255, 255) none repeat scroll 0% 0% padding-box;
@@ -134,7 +148,6 @@ input[type='file'] {
 	min-width: 66px;
 	margin-left: 110px;
 }
-
 .pac-item {
 	line-height: 15px;
 }

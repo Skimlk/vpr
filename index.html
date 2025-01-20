@@ -3,40 +3,22 @@
 	<head>
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
 		<meta content="utf-8" http-equiv="encoding" />
-		<title>VPR</title>
+		<title>Position Resector</title>
 		<link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
 		<link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
 	</head>
 	<body>
 		<div id="enlarged-overlay" style="display: none">
-			<div
-				id="overlay-bg"
-				style="
-					z-index: 6;
-					top: 0;
-					left: 0;
-					position: absolute;
-					background-color: black;
-					opacity: 80%;
-					height: 100%;
-					width: 100%;
-				"
-			></div>
+			<div id="overlay-bg"></div>
 			<div id="eo-box">
-				<div id="overlaycanvascont">
-					<canvas id="overlaycanvas" style="height: 100%; width: 100%"></canvas>
-					<img
-						id="overlayimg"
-						style="display: none; height: 100%; width: 100%"
-						src="2.jpg"
-					/>
-				</div>
+				<canvas id="overlay-canvas"></canvas>
+				<img id="overlay-img"/>
 			</div>
 		</div>
 
-		<div id="top-bar" style="align-text: center">
+		<div id="top-bar">
 			<center style="margin-top: 1px">
-				<h1 style="margin: 0px; font-size: 17.5px">
+				<h1 style="margin: 0px; font-size: 15px">
 					Virtual Position Resector
 				</h1>
 				<h2 style="margin: 0px; font-size: 10px">By: Sam Kimak</h2>
@@ -57,9 +39,9 @@
 							<select name="" id="image-selector"></select>
 						</form>
 						<div id="canvas-container" width="400px">
-							<canvas id="canvas" style="width: 100%; display: block"></canvas>
+							<canvas id="canvas"></canvas>
 							<div style="display: none">
-								<img id="scream" src="./assets/images/placeholder.jpg" />
+								<img id="background-image" src="./assets/images/placeholder.jpg" />
 							</div>
 						</div>
 						<input
@@ -167,16 +149,8 @@
 		/>
 
 		<script src="./assets/js/map.js"></script>
-
-		<script>
-			document.getElementById("image-selector").value;
-			document.getElementById("imageManip").style.display = "none";
-			imageSelected = null;
-			images = [];
-		</script>
-
-		<script src="./assets/js/loc.js"></script>
-		<script src="./assets/js/createImgObj.js"></script>
+		<script src="./assets/js/calc.js"></script>
+		<script src="./assets/js/imagePointManager.js"></script>
 		<script src="./assets/js/image-canvas.js"></script>
 	</body>
 </html>

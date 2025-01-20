@@ -1,3 +1,13 @@
+newImageButton = document.getElementById("newimg-button");
+imageSelector = document.getElementById("image-selector");
+image = document.getElementById("background-image");
+imageCanvas = document.getElementById("canvas");
+
+document.getElementById("image-selector").value;
+document.getElementById("imageManip").style.display = "none";
+imageSelected = null;           
+images = [];
+
 function Point(name, mapCoords, imgXCoord, bearing, natWid) {
   this.name = name;
   this.mapCoords = null;
@@ -13,24 +23,19 @@ function ImgObj(name, url, points, bearings, fov) {
         this.fov = fov;
 }
 
-newImageButton = document.getElementById("newimg-button");
-imageSelector = document.getElementById("image-selector");
-image = document.getElementById("scream");
-imageCanvas = document.getElementById("canvas");
-
 function updateImage() {
         if(images[imageSelected].url == undefined)
         {
-        	document.getElementById("scream").src = "./assets/images/placeholder.jpg";
+        	document.getElementById("background-image").src = "./assets/images/placeholder.jpg";
         }
         else
         {
-                document.getElementById("scream").src = images[imageSelected].url;
+                document.getElementById("background-image").src = images[imageSelected].url;
         }
-	document.getElementById("scream").onload = function() {
-	    document.getElementById("canvas").width = document.getElementById("scream").naturalWidth;
-		images[imageSelected].natWid = document.getElementById("scream").naturalWidth;
-	    document.getElementById("canvas").height = document.getElementById("scream").naturalHeight;
+	document.getElementById("background-image").onload = function() {
+	    document.getElementById("canvas").width = document.getElementById("background-image").naturalWidth;
+		images[imageSelected].natWid = document.getElementById("background-image").naturalWidth;
+	    document.getElementById("canvas").height = document.getElementById("background-image").naturalHeight;
 		ctx.drawImage(img, 0, 0);
 		updateCanvasPoints();
 	}
@@ -39,13 +44,10 @@ function updateImage() {
 function setupImage() {
 	document.getElementById('sidebar-element-container').innerHTML = "";
 	imageSelected = document.getElementById('image-selector').value;
-        pointSelected = undefined;
+    pointSelected = undefined;
 
-        document.getElementById('image-name-field').value = images[imageSelected].name;
-	//if(images[imageSelected].url != undefined)
-	//{
-		document.getElementById('url-field').value = images[imageSelected].url;
-        //}
+    document.getElementById('image-name-field').value = images[imageSelected].name;
+	document.getElementById('url-field').value = images[imageSelected].url;
 	document.getElementById('fov-field').value = images[imageSelected].fov;
 }
 
@@ -57,7 +59,6 @@ function setupPoint(pointNum) {
 	document.getElementById("sidebar-element-container").append(pointcontainer)
 
 	//Give Element Values
-
 	var point = document.getElementById("point" + pointNum);
 
 	//Title
@@ -84,8 +85,6 @@ function setupPoint(pointNum) {
         }
 
 	//Bearing Selector
-
-
 	document.getElementById("point" + pointNum).querySelector('[class^=bearing-selector').setAttribute("id", "bearing" + pointNum);
 	document.getElementById("bearing" + pointNum).onchange = function() {
 		if(document.getElementById("bearing" + pointNum).checked)
@@ -139,20 +138,19 @@ function displayPoints(img)
 }
 
 //Create and Change Images Manually
-
 newImageButton.onclick = function() {
 	imageNum = 0;
 	while(images[imageNum] != undefined)
 	{
 		imageNum++;
 	}
-        images[imageNum] = new ImgObj;
+    images[imageNum] = new ImgObj;
 
-        images[imageNum].name = "Image #" + (imageNum + 1);
+    images[imageNum].name = "Image #" + (imageNum + 1);
 	imageSelector.options.add(new Option(images[imageNum].name, imageNum));
 
-        document.getElementById("imageManip").style.display = "initial";
-        imageSelector.value = imageNum;
+    document.getElementById("imageManip").style.display = "initial";
+    imageSelector.value = imageNum;
 
 	setupImage();
 	updateImage();
@@ -168,10 +166,10 @@ document.getElementById('image-selector').onchange = function() {
 }
 
 document.getElementById("enlarge-btn").onclick = function() {
-	document.getElementById("overlayimg").src = document.getElementById("scream").src;
+	document.getElementById("overlay-img").src = document.getElementById("background-image").src;
 	document.getElementById("enlarged-overlay").style.display = "initial";
-	c = document.getElementById("overlaycanvas");
-	img = document.getElementById("overlayimg");
+	c = document.getElementById("overlay-canvas");
+	img = document.getElementById("overlay-img");
 	document.documentElement.style.setProperty("--overlay-box-height", img.naturalHeight);
 	document.documentElement.style.setProperty("--overlay-box-width", img.naturalWidth);
 	c.height = img.naturalHeight;
@@ -185,9 +183,8 @@ document.getElementById("enlarge-btn").onclick = function() {
 	image.onmousemove = () => {
                 if(images[imageSelected].url != undefined)
                 {
-                        //document.getElementsByTagName("body")[0].style.cursor = "url('google.cur'), auto";
                         ctx.drawImage(img, 0, 0);
-                        x = ((event.pageX - document.getElementById("eo-box").offsetLeft)/image.clientWidth) * document.getElementById("overlayimg").naturalWidth;
+                        x = ((event.pageX - document.getElementById("eo-box").offsetLeft)/image.clientWidth) * document.getElementById("overlay-img").naturalWidth;
                         ctx.beginPath();
                                 drawLine(x, "#00ff00");
                                 drawLine(x + 1, "#00ff00");
@@ -197,29 +194,27 @@ document.getElementById("enlarge-btn").onclick = function() {
                 }
 	}
 	image.onclick = () => {
-                if(images[imageSelected].url != undefined && pointSelected != undefined){
-	                //alert("X Coordinate: " + x);
-	                images[imageSelected].points[pointSelected].imgXCoord = x;
-	                document.getElementById("point" + pointSelected).querySelector(".xcoordField").value = images[imageSelected].points[pointSelected].imgXCoord;
-	                //drawLine(x, "rgb(253, 117, 103)");
-	                rePoints();
+		if(images[imageSelected].url != undefined && pointSelected != undefined){
+			images[imageSelected].points[pointSelected].imgXCoord = x;
+			document.getElementById("point" + pointSelected).querySelector(".xcoordField").value = images[imageSelected].points[pointSelected].imgXCoord;
+			rePoints();
 
 			document.getElementById("enlarged-overlay").style.display = "none";
-		        c = document.getElementById("canvas");
-		        ctx = c.getContext("2d");
-		        img = document.getElementById("scream");
-		        image = c;
-		        ctx.drawImage(img, 0, 0);
-		        updateCanvasPoints();
-		        ctx.stroke();
-        	}
+		    c = document.getElementById("canvas");
+		    ctx = c.getContext("2d");
+		    img = document.getElementById("background-image");
+		    image = c;
+		    ctx.drawImage(img, 0, 0);
+		    updateCanvasPoints();
+		    ctx.stroke();
+       	}
 	}
 }
 document.getElementById("overlay-bg").onclick = function() {
 	document.getElementById("enlarged-overlay").style.display = "none";
 	c = document.getElementById("canvas");
 	ctx = c.getContext("2d");
-	img = document.getElementById("scream");
+	img = document.getElementById("background-image");
 	image = c;
 	ctx.drawImage(img, 0, 0);
 	updateCanvasPoints();
@@ -258,7 +253,6 @@ document.getElementById('image-remove-button').onclick = function() {
 
 
 //Change Image Properties
-
 document.getElementById("image-name-field").onchange = () => {
         images[imageSelected].name = document.getElementById('image-name-field').value;
         document.getElementById("image-selector")[imageSelected].innerHTML = images[imageSelected].name;
@@ -281,7 +275,6 @@ document.getElementById("url-field").onchange = () => {
 
 
 //Create Points Manually
-
 document.getElementById('newpoint-button').onclick = function() {
 	var pointNum = 0;
 	while(images[imageSelected].points[pointNum] != undefined)
